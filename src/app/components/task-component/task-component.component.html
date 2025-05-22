@@ -1,0 +1,32 @@
+<div class="main_Container">
+    <div class="input_Container">
+<input type="text" class="inputField" [(ngModel)]="newTask">
+    <button mat-flat-button style="background-color: orange;" [disabled]="!newTask" (click)="submit()">Add Task</button>
+</div>
+<div class="display_Container">
+    @if(allTasks.items.length!=0){
+        @for (tasks of allTasks.items ; track tasks._id){
+       
+            <mat-card appearance="outlined" style="border: none;">
+            <mat-card-content style="width: 35vw;">
+                @if(tasks.completed){
+                        <mat-icon style="color: green;float: left;">check_circle</mat-icon> &nbsp;&nbsp;
+                }
+               {{tasks.name}}
+                <span style="float:inline-end;">
+
+                <mat-icon (click)="editTask(tasks._id)" style="color: orange;">edit</mat-icon>
+                <mat-icon (click)="deleteTask(tasks._id)" style="color: orange;">delete</mat-icon>
+            </span>
+        </mat-card-content>
+            </mat-card>
+        }
+    }@else{
+        <h4 style="color: white;">Please Add your tasks.</h4>
+    }
+      
+  
+</div>
+</div>
+
+

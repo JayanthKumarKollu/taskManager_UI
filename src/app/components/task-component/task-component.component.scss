@@ -1,0 +1,42 @@
+*{
+
+    background-color: black;
+}
+.main_Container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    flex-direction: column;
+    height: 100vh;
+    gap: 5vw;
+    color: white;
+    
+     
+  
+}
+.input_Container{
+    display: flex;
+    gap: 5vw;
+}
+.display_Container::-webkit-scrollbar{
+    display: none;
+}
+.display_Container{
+    display: flex;
+    flex-direction: column;
+  gap: 1vw;
+  overflow: scroll;
+  height: 50vh;  
+}
+.inputField{
+    width: 20vw;
+    height: 5vh;
+    border: none;
+    outline: none;
+    text-align: center;
+    border-radius: 1vw;
+    color: white;
+    border: 1px solid orange;
+}
+

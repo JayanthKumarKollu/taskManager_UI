@@ -1,0 +1,16 @@
+<div class="main_Container">
+    <h2 mat-dialog-title>Edit you Task</h2>
+    <mat-dialog-content style="overflow: hidden;">
+        <form style="display: flex;flex-direction: column;">
+            <mat-form-field>
+                <mat-label>Task Name</mat-label>
+                <input matInput type="text" [(ngModel)]="taskName" name="taskName">
+            </mat-form-field>
+            <mat-checkbox (change)="isChecked()" [checked]="isCompleted">Completed</mat-checkbox>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button (click)="updateTask()">Update</button>
+        <button mat-button mat-dialog-close>cancel</button>
+    </mat-dialog-actions>
+</div>
