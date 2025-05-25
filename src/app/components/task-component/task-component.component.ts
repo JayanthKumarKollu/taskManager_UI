@@ -13,6 +13,8 @@ import {
   MatSnackBar,
 } from '@angular/material/snack-bar';
 import { Console, error } from 'console';
+import { json } from 'stream/consumers';
+import { stringify } from 'querystring';
 @Component({
   selector: 'app-task-component',
   standalone: true,
@@ -24,7 +26,7 @@ export class TaskComponentComponent {
    
   newTask:string="";
   allTasks:any=[];
-  taskBluePrint={
+  taskBluePrint:any={
     name: '',
     completed: false,
     id: ''
@@ -34,27 +36,32 @@ export class TaskComponentComponent {
    private _snackBar = inject(MatSnackBar);
 constructor( ){}
   ngOnInit(){
-    console.log("blue print",this.taskBluePrint)
-    this.gettingAllTasks();
+
+    this.gettingAllTasks( localStorage.getItem("id"));
+
   }
   editTask(param:any){
 this.taskBluePrint.id=param;
+console.log("user id",this.taskBluePrint)
  let dailogRef = this.dialog.open(EditTaskDailogComponent,{
       data:this.taskBluePrint
     });
     dailogRef.afterClosed().subscribe((res)=>{
-      this.gettingAllTasks();
+      this.gettingAllTasks( localStorage.getItem("id"));
     })
   }
-  gettingAllTasks(){
-    this.taskServer.getAllTasks().subscribe((res)=>{
+  gettingAllTasks(data:any){
+    let val = data
+    this.taskServer.getAllTasks(val).subscribe((res)=>{
       console.log("result",res
       );
       this.allTasks=res;
-    console.log(this.allTasks.items)
+    console.log(this.allTasks)
     })
   }
   submit(){
+
+    this.taskBluePrint.userID = localStorage.getItem("id");
     this.taskBluePrint.name=this.newTask;
     this.taskBluePrint.completed=false;
    this.taskServer.addTask(this.taskBluePrint).subscribe({
@@ -65,7 +72,7 @@ this.taskBluePrint.id=param;
       verticalPosition:"top",
       duration:1500
     });
-     this.gettingAllTasks();
+     this.gettingAllTasks( localStorage.getItem("id"));
      this.newTask="";
     }
     },
@@ -98,7 +105,7 @@ this._snackBar.open("Task Deleted Successfully.","Ok",{
       verticalPosition:"top",
       duration:1500
 })
-  this.gettingAllTasks();
+  this.gettingAllTasks( localStorage.getItem("id"));
 })
     })
 

@@ -1,0 +1,45 @@
+.main_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    flex-direction: column;
+    height: 100vh;
+    gap: 2vw;
+    background-color: black;
+    
+    h3{
+        color: orange;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+
+    }
+    input{
+        width: 20vw;
+         font-family:Georgia, 'Times New Roman', Times, serif;
+    height: 5vh;
+    border: 2px solid orange;
+    border-radius: 10vw;
+    outline: none;
+    text-align: center;
+    background-color: transparent;
+    color: white;
+    }
+    button{
+        width: 10vw;
+        height: 5vh;
+        background-color: orange;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        color: white;
+        font-weight: bold;
+        outline: none;
+        border: none;
+        border-radius: 10vw;
+        cursor: pointer;
+
+    }
+    small{
+        color: white;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}

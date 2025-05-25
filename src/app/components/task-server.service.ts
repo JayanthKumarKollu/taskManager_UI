@@ -8,20 +8,27 @@ export class TaskServerService {
  baseURL=environment.baseURL
   constructor(private http:HttpClient) { }
 
-  getAllTasks(){
-    return this.http.get(`${this.baseURL}/api/tasks/`)
+  getAllTasks(data:any){
+    console.log("data in service",data)
+    return this.http.get(`${this.baseURL}/api/tasks/loggeduser/${data}`)
   }
   addTask(data:any){
     return this.http.post(`${this.baseURL}/api/tasks/`,data)
   }
   updateTask(data:any){
-    return this.http.patch(`${this.baseURL}/api/tasks/${data._id}`,data)
+    console.log("updateTaskfun",data._id)
+    return this.http.patch(`${this.baseURL}/api/tasks/loggeduser/${data._id}`,data)
 
   }
   deleteTask(data:any){
-    return this.http.delete(`${this.baseURL}/api/tasks/${data}`);
+    return this.http.delete(`${this.baseURL}/api/tasks/loggeduser/${data}`);
   }
   getTaskById(data:any){
-    return this.http.get(`${this.baseURL}/api/tasks/${data}`)
+    console.log("updated id",data)
+    return this.http.get(`${this.baseURL}/api/tasks/updateItem/${data}`)
+  }
+
+  login(data:any){
+    return this.http.post(`${this.baseURL}/api/login/authenticate/`,data)
   }
 }
