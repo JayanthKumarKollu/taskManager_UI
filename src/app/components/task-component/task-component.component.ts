@@ -12,13 +12,12 @@ import { EditTaskDailogComponent } from '../../dailogs/edit-task-dailog/edit-tas
 import {
   MatSnackBar,
 } from '@angular/material/snack-bar';
-import { Console, error } from 'console';
-import { json } from 'stream/consumers';
-import { stringify } from 'querystring';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @Component({
   selector: 'app-task-component',
   standalone: true,
-  imports: [FormsModule,CommonModule,MatButtonModule,MatInputModule,MatCardModule,MatIconModule],
+  imports: [MatFormFieldModule,MatDatepickerModule,FormsModule,CommonModule,MatButtonModule,MatInputModule,MatCardModule,MatIconModule],
   templateUrl: './task-component.component.html',
   styleUrl: './task-component.component.scss'
 })
@@ -29,8 +28,11 @@ export class TaskComponentComponent {
   taskBluePrint:any={
     name: '',
     completed: false,
-    id: ''
+    id: '',
+    deadline:''
   };
+  taskDate:string='';
+  taskTime:string='';
   private taskServer = inject(TaskServerService);
   private dialog = inject(MatDialog);
    private _snackBar = inject(MatSnackBar);
@@ -42,7 +44,6 @@ constructor( ){}
   }
   editTask(param:any){
 this.taskBluePrint.id=param;
-console.log("user id",this.taskBluePrint)
  let dailogRef = this.dialog.open(EditTaskDailogComponent,{
       data:this.taskBluePrint
     });
@@ -53,17 +54,21 @@ console.log("user id",this.taskBluePrint)
   gettingAllTasks(data:any){
     let val = data
     this.taskServer.getAllTasks(val).subscribe((res)=>{
-      console.log("result",res
-      );
+ if(res!="no data added yet."){
       this.allTasks=res;
-    console.log(this.allTasks)
+ }
+
     })
   }
   submit(){
+    // const deadlineISO = new Date(`${this.taskDate}T${this.taskTime}`);
 
     this.taskBluePrint.userID = localStorage.getItem("id");
     this.taskBluePrint.name=this.newTask;
     this.taskBluePrint.completed=false;
+    this.taskBluePrint.deadline = `${this.taskDate}T${this.taskTime}`;
+
+
    this.taskServer.addTask(this.taskBluePrint).subscribe({
     next:(data)=>{
   if(data){
@@ -74,10 +79,11 @@ console.log("user id",this.taskBluePrint)
     });
      this.gettingAllTasks( localStorage.getItem("id"));
      this.newTask="";
+     this.taskDate='';
+     this.taskTime="";
     }
     },
     error:(err)=>{
-      console.log("error",err)
        this._snackBar.open(err.error.msg, 'Retry', {
       horizontalPosition: "center",
       verticalPosition:"top",
@@ -87,8 +93,6 @@ console.log("user id",this.taskBluePrint)
 
 
     }
-  
-   
 
    })
   }

@@ -1,7 +1,10 @@
 <div class="main_Container">
     <div class="input_Container">
-<input type="text" class="inputField" [(ngModel)]="newTask">
-    <button mat-flat-button style="background-color: orange;" [disabled]="!newTask" (click)="submit()">Add Task</button>
+        <input type="text" class="inputField" [(ngModel)]="newTask" placeholder="Enter your task">
+        <input type="date"  class="inputField" [(ngModel)]="taskDate" placeholder="Date to complete task" title="Date to complete task">
+        <input type="time" class="inputField" [(ngModel)]="taskTime" title="Time to complete task">
+    <button mat-flat-button style="background-color: orange;" [disabled]="!newTask || !taskDate || !taskTime" (click)="submit()">Add Task</button>
+
 </div>
 <div class="display_Container">
     @if(allTasks.length!=0){

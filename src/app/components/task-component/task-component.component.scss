@@ -1,5 +1,4 @@
 *{
-
     background-color: black;
 }
 .main_Container{
@@ -11,10 +10,8 @@
     height: 100vh;
     gap: 5vw;
     color: white;
-    
-     
-  
 }
+
 .input_Container{
     display: flex;
     gap: 5vw;
@@ -36,7 +33,8 @@
     outline: none;
     text-align: center;
     border-radius: 1vw;
-    color: white;
+        background-color: navajowhite;
+    color: black;
     border: 1px solid orange;
 }
 

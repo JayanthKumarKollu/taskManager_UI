@@ -29,10 +29,8 @@ export class EditTaskDailogComponent {
    data = inject(MAT_DIALOG_DATA);
 private taskServer = inject(TaskServerService);
 ngOnInit(){
-  console.log("data from task comp",this.data)
   this.taskServer.getTaskById(this.data.id).subscribe((res)=>{
     this.data=res;
-    console.log("data",this.data)
 this.taskName=this.data.name;
 this.isCompleted=this.data.completed
   })
@@ -43,7 +41,6 @@ this.isCompleted=this.data.completed
 
     this.data.name=this.taskName;
     this.data.completed=this.isCompleted;
-    console.log("daa value",this.data)
     this.taskServer.updateTask(this.data).subscribe((res)=>{
       this.dailogRef.close()
     })
