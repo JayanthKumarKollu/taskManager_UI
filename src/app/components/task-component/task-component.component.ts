@@ -62,11 +62,12 @@ this.taskBluePrint.id=param;
   }
   submit(){
     // const deadlineISO = new Date(`${this.taskDate}T${this.taskTime}`);
+   // this.taskBluePrint.deadline = `${this.taskDate}T${this.taskTime}`;
 
     this.taskBluePrint.userID = localStorage.getItem("id");
     this.taskBluePrint.name=this.newTask;
     this.taskBluePrint.completed=false;
-    this.taskBluePrint.deadline = `${this.taskDate}T${this.taskTime}`;
+    this.taskBluePrint.deadline = deadlineISO;
 
 
    this.taskServer.addTask(this.taskBluePrint).subscribe({
